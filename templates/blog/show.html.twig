@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %} article{% endblock %}
+{% block body%}
+<style>
+.articles{
+
+    border-radius:10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,25);
+    padding: 16px 20px;
+}
+img{
+    border-radius:10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,25);
+    margin:10px;
+
+}
+</style>
+<h1> article page</h1>
+</section>
+<section class="articles mt-5">
+<article class="mb-5">
+<h2>title of article</h2>
+<div class="metadata">
+written on 12/09/2021 at 12:50 PM
+<span class="badge badge-danger">lettre</span>
+</div>
+<div class="content">
+<img src="https://picsum.photos/seed/picsum/300/150" alt="">
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</div>
+</article>
+
+</section>
+{% endblock %}
