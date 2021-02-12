@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% form_theme commentForm 'bootstrap_4_layout.html.twig' %}
 {% block title %} article{% endblock %}
 {% block body%}
 <style>
@@ -37,7 +38,13 @@ Posted at {{article.createdAt | date ('d-m-Y')}} at {{article.createdAt | date (
 </article>
 
 </section>
+{% if app.user %}
+{% if app.user==article.user %}
 <a class="btn btn-success mt-5 mb-5" href="{{ path('article_edit',{'id':article.id} )}}">Edit</a>
+{% endif %}
+{% endif %}
+<hr>
+<h2>Comments</h2>
 <section id="comments">
    {% for comment in article.comments %}
    <div class="comment">
@@ -50,4 +57,18 @@ Posted at {{article.createdAt | date ('d-m-Y')}} at {{article.createdAt | date (
    </div>
    {% endfor %}
 </section>
+
+<hr>
+{% if not app.user %}
+<h2>Hou have to be connected to make comment</h2>
+<a class="btn btn-info" href="{{path('app_login')}}">Login</a>
+{% else %}
+<section>
+<h2>Add a comment</h2>
+{{ form_start(commentForm) }}
+{{ form_widget(commentForm) }}
+<button class="btn btn-success">Add Comment</button>
+{{ form_end(commentForm)}}
+</section>
+{% endif %}
 {% endblock %}

@@ -25,6 +25,9 @@ img{
 <div class="metadata">
 Posted at {{article.createdAt | date ('d-m-Y')}} at{{article.createdAt | date ('H:i')}} 
 <span class="badge badge-danger">{{article.category.title}}</span>
+{% if article.user %}
+By <span class="badge badge-success"><strong>{{article.user.firstName}} {{article.user.lastName}}</strong></span>
+{% endif %}
 </div>
 <div class="content">
 <img src="{{article.image}}" alt="">
@@ -33,6 +36,10 @@ Posted at {{article.createdAt | date ('d-m-Y')}} at{{article.createdAt | date ('
 </div>
 </article>
 
+
 </section>
 {% endfor %}
+<div class="navigation mt-5">
+{{ knp_pagination_render(articles) }}
+</div>
 {% endblock %}

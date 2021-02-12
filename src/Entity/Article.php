@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -21,11 +22,21 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     * min= 10,
+     * max= 255,
+     * minMessage= "The title have to contain {{ limit }} character at least",
+     * maxMessage= "The title don't have to be more then {{ limit }} characters"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     * min= 30,
+     * minMessage= "The content have to contain {{ limit }} character at least"
+     * )
      */
     private $content;
 
@@ -48,6 +59,11 @@ class Article
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article")
      */
     private $comments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     */
+    private $user;
 
     public function __construct()
     {
@@ -145,6 +161,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
