@@ -14,6 +14,11 @@ img{
     margin:10px;
 
 }
+#comments{
+    padding:10px;
+    
+
+}
 </style>
 <h1> article page</h1>
 </section>
@@ -21,8 +26,9 @@ img{
 <article class="mb-5">
 <h2>{{article.title}}</h2>
 <div class="metadata">
-Posted at {{article.createdAt | date ('d-m-Y')}} at{{article.createdAt | date ('H:i')}}
+Posted at {{article.createdAt | date ('d-m-Y')}} at {{article.createdAt | date ('H:i')}}
 <span class="badge badge-danger">{{article.category.title}}</span>
+<span class="badge badge-success">{{article.comments| length}} Comments</span> 
 </div>
 <div class="content">
 <img src="{{article.image}}" alt="">
@@ -30,5 +36,18 @@ Posted at {{article.createdAt | date ('d-m-Y')}} at{{article.createdAt | date ('
 </div>
 </article>
 
+</section>
+<a class="btn btn-success mt-5 mb-5" href="{{ path('article_edit',{'id':article.id} )}}">Edit</a>
+<section id="comments">
+   {% for comment in article.comments %}
+   <div class="comment">
+       <div class="row">
+           <div class="md-col-3" style="color:red;">
+            (<small>{{comment.createdAt | date('d-m-Y')}} at {{comment.createdAt | date('H:i')}}</small>) {{comment.author}}
+           </div>
+        </div>
+   <p>{{comment.content}}</p>
+   </div>
+   {% endfor %}
 </section>
 {% endblock %}

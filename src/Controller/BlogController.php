@@ -46,6 +46,26 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route("article/{id}/edit",name="article_edit")
+     */
+    public function edit(Request $request,Article $article): Response
+    {
+        $form=$this->createForm(ArticleType::class,$article);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+           
+            $entityManager =$this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute("article_show",['id'=>$article->getId()]);
+        }
+
+        return $this->render("blog/edit.html.twig",[
+            'editForm'=>$form->createView()
+        ]);
+    }
+
+    /**
      * @Route("article/{id}",name="article_show")
      */
     public function show(Article $article){
