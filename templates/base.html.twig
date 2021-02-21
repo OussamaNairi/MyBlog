@@ -22,16 +22,15 @@
         <a class="nav-link" href="{{ path('blog')}}">My Articles
           <span class="sr-only">(current)</span>
         </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('registration')}}">Create New Account</a>
-      </li>
+     
       
       
       {% if app.user %}
       <li class="nav-item">
         <a class="nav-link" href="{{path('article_new')}}">New Article</a>
       </li>
+       </ul>
+      <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="#">Hello {{app.user.firstName}}</a>
       </li>
@@ -39,6 +38,10 @@
         <a class="nav-link" href="{{ path('app_logout')}}">Sign Out</a>
       </li>
       {% else %}
+       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('registration')}}">Create New Account</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ path('app_login')}}">Login</a>
       </li>
