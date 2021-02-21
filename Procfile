@@ -1,2 +1,2 @@
-release: php bin/console doctrine:database:create && php bin/console doctrine:schema:update --force  && php bin/console doctrine:fixtures:load --env=prod --append
+release: php bin/console doctrine:schema:update --force  && php bin/console doctrine:fixtures:load --env=prod --purge-with-truncate
 web: heroku-php-apache2 public/
